@@ -14,7 +14,7 @@
           </RouterLink>
         </div>
           <div class="justify-self-end flex gap-4 items-center justify-center">
-              <icon-trash class="cursor-pointer" />
+              <icon-trash v-if="currentRoute == 'trash'" class="cursor-pointer" />
               <icon-upload class="cursor-pointer"/>
           </div>
       </nav>
@@ -24,8 +24,14 @@
 </template>
 
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import {computed} from "vue"
+import { RouterLink, RouterView, useRouter } from 'vue-router'
 import IconTrash from './components/icons/IconTrash.vue';
 import IconUpload from './components/icons/IconUpload.vue';
 
-</script>
+const router = useRouter()
+
+const currentRoute = computed(() =>{
+  return router.currentRoute.value.name
+})
+</script> 
