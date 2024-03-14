@@ -21,8 +21,8 @@ function addToDb(filername, duration){
     let statement = db.prepare(
         `INSERT OR IGNORE INTO videofile (filename, duration, if_faw, is_del) VALUES (?,?,?,?)`
     )
-    const info = statement.run(filename, duration, 0 ,0);
-     return info.changes
+    const info = statement.run(filename, duration, 0, 0);
+    return info.changes
 }
 
 module.exports = {
