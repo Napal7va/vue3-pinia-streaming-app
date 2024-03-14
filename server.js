@@ -16,3 +16,12 @@ let storage = multer.diskStorage({
 });
 
 const uploads = multer({storage: storage});
+const db = require("./database.js");
+
+const app = express()
+const port = 3000;
+
+app.use(cors())
+app.use(bodyParser.json())
+app.use(bodyPasper.urlencoded({extended:true}));
+app.post("/uploadvideo", uploads.single("videofile"), function(_req, res){})
