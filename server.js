@@ -17,11 +17,23 @@ let storage = multer.diskStorage({
 
 const uploads = multer({storage: storage});
 const db = require("./database.js");
+const { execSync } = require('child_process');
 
 const app = express()
 const port = 3000;
 
+const getVideoDuration = function(file,callback){
+    getVideoDurationInSeconds("Videos/"+file).then((duration)=>{
+        db.addToDb(file,duration);
+        callback();
+    });
+};
+
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyPasper.urlencoded({extended:true}));
-app.post("/uploadvideo", uploads.single("videofile"), function(_req, res){})
+app.post("/uploadvideo", uploads.single("videofile"), function(_req, res){
+    const command = execSync(
+        `./getThumbnail.sh -i ./Videos/${_req.file.originalname} -d ./assets/images`
+    );
+});
