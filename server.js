@@ -33,13 +33,12 @@ const getVideoDuration = function(file,callback){
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyPasper.urlencoded({extended:true}));
-<<<<<<< HEAD
+
 app.post("/uploadvideo", uploads.single("videofile"), function(_req, res){
     const command = execSync(
         `./getThumbnail.sh -i ./Videos/${_req.file.originalname} -d ./assets/images`
     );
 });
-=======
-app.post("/uploadvideo", uploads.single("videofile"), function(_req, res){})
-
->>>>>>> 64a4cdc18a374ad60a55d13fdc282f05e2e69a60
+app.listen(port,()=>{
+    console.log("server has started")
+});
