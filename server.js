@@ -21,7 +21,7 @@ const db = require("./database.js");
 const { execSync } = require('child_process');
 
 const app = express()
-const port = 3000;
+const port = 3001;
 
 const getVideoDuration = function(file,callback){
     getVideoDurationInSeconds("Videos/"+file).then((duration)=>{
@@ -32,7 +32,7 @@ const getVideoDuration = function(file,callback){
 
 app.use(cors())
 app.use(bodyParser.json())
-app.use(bodyPasper.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({extended:true}));
 
 app.post("/uploadvideo", uploads.single("videofile"), function(_req, res){
     const command = execSync(
@@ -41,4 +41,4 @@ app.post("/uploadvideo", uploads.single("videofile"), function(_req, res){
 });
 app.listen(port,()=>{
     console.log("server has started")
-});
+})
